@@ -262,3 +262,58 @@ class Solution:
 ```
 
 ### 7、二叉树与双向链表
+#### 题目描述
+输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。
+
+#### 题目解析
+二叉搜索树中序遍历为有序
+
+当前结点的left指向中序遍历前一结点，前一结点right指向当前结点
+
+#### 题目代码
+```
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    def __init__(self):
+        self.head = None
+        self.prenode = None
+            
+    def Convert(self, pRootOfTree):
+        # write code here
+        self.process(pRootOfTree, None)
+        return self.head
+    
+    def process(self, root, prenode):
+        if root==None:
+            return
+        
+        self.process(root.left, root)
+        if self.prenode:
+            self.prenode.right = root
+            root.left = self.prenode
+        else:
+            self.head = root
+        self.prenode = root
+        self.process(root.right, root)
+        
+```
+
+### 8、最小的K个数
+#### 题目描述
+输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4,。
+
+#### 题目解析
+Top K问题
+
+1、维护大小为K的大根堆 O(NlogK)
+
+2、快排 partition 平均O(N)
+
+3、bfprt O(N), 有点难，暂时搞不定 >.<
+
+#### 题目代码
